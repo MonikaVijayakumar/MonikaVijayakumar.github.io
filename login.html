@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm" action="/index.html" method="GET">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <!-- <script>
+            http://localhost/matomo/index.php?module=Login
+        </script> -->
+        <!-- <script>
+            function loginMatomo() {
+              var xhr = new XMLHttpRequest();
+          
+              xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                  // Handle the response here
+                  console.log(xhr.responseText);
+                }
+              };
+          
+              xhr.open('POST', 'http://localhost/matomo/index.php?module=Login', true);
+          
+              // Add headers if needed
+              xhr.setRequestHeader('Content-Type', 'application/json');
+              data = {
+                    "form_login": document.getElementById('username').value,
+                    "form_password": document.getElementById('password').value
+                }
+                console.log(data)
+              // Send the request
+              xhr.send(data);
+            }
+          
+            // Add an event listener to the form
+            document.getElementById('loginForm').addEventListener('submit', function(event) {
+              event.preventDefault(); // Prevent the default form submission
+          
+              // Call your function to make the HTTP request
+              loginMatomo();
+            });
+          </script> -->
+        <script>
+            function loginMatomo() {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // Matomo authentication successful
+                        console.log(xhr.responseText);
+                    }
+                };
+
+                // Replace 'https://your-matomo-instance/index.php?module=API&method=UsersManager.getTokenAuth' with your Matomo authentication endpoint
+                xhr.open('GET', 'http://localhost/matomo/index.php?module=login', true);
+                var username = document.getElementById('username').value;
+                var password = document.getElementById('password').value
+                // Set the appropriate headers and parameters based on the chosen authentication method
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                var data = `user=${username}&password=${password}`; // Adjust accordingly
+
+                xhr.send(data);
+            }
+
+            function checkAPI() {
+
+
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // Matomo authentication successful
+                        console.log(xhr.responseText);
+                    }
+                };
+
+                // Replace 'https://your-matomo-instance/index.php?module=API&method=UsersManager.getTokenAuth' with your Matomo authentication endpoint
+                xhr.open('GET', 'http://localhost/matomo/index.php?module=API&method=SitesManager.addSite&siteName=Test API 1&urls=https://web.whatsapp.com&token_auth=05eead13a26bbe368fadefcead405a97', true);
+                // var username = document.getElementById('username').value;
+                // var password = document.getElementById('password').value
+                // // Set the appropriate headers and parameters based on the chosen authentication method
+                // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                // var data = `user=${username}&password=${password}`; // Adjust accordingly
+
+                xhr.send();
+            }
+            // Add an event listener to the form
+            document.getElementById('loginForm').addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Call your function to make the HTTP request
+                checkAPI();
+            });
+        </script>
+    </div>
+</body>
+
+</html>
