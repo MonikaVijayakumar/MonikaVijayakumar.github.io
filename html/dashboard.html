@@ -18,7 +18,10 @@
                 },
                 body: '',
             })
-              .then(response => response.json()) // Parse JSON response
+              .then(response => {
+                 console.log('***********')
+                 console.log(response.json())
+               }) // Parse JSON response
               .then(data => {
                   // Display data in the output div
                   console.log(data)
